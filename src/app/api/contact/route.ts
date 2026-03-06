@@ -51,10 +51,12 @@ export async function POST(req: NextRequest) {
       );
 
       const verifyData = await verifyRes.json();
+      console.log("reCAPTCHA Enterprise response:", JSON.stringify(verifyData, null, 2));
       if (
         !verifyData.tokenProperties?.valid ||
         verifyData.riskAnalysis?.score < 0.5
       ) {
+        console.log("reCAPTCHA failed - tokenValid:", verifyData.tokenProperties?.valid, "score:", verifyData.riskAnalysis?.score);
         return NextResponse.json(
           { error: "reCAPTCHA verification failed. Please try again." },
           { status: 400 }
