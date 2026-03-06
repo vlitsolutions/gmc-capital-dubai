@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/config";
 const footerLinks = {
   Services: [
     { label: "Brand Strategy", href: "#services" },
-    { label: "Performance Marketing", href: "#services" },
+    { label: "Digital Marketing Strategy & Performance", href: "#services" },
     { label: "Market Entry", href: "#services" },
     { label: "Business Advisory", href: "#services" },
     { label: "Marketing Management", href: "#services" },
@@ -82,11 +82,13 @@ export default function Footer() {
 
       <div className="border-t border-white/5">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/25">
-            &copy; {new Date().getFullYear()} {siteConfig.companyName}. All rights
-            reserved. License No. {siteConfig.licenseNumber} &mdash; {siteConfig.freeZone},
-            Dubai, UAE.
-          </p>
+          <div className="text-xs text-white/25 space-y-1">
+            <p>
+              &copy; {new Date().getFullYear()} {siteConfig.companyName}. All rights reserved.
+            </p>
+            <p>License No. {siteConfig.licenseNumber} &mdash; Registered in {siteConfig.freeZone}, Dubai</p>
+            <p>Management Consultancy (7020.00) &middot; Marketing Management (7320.96)</p>
+          </div>
           <div className="flex items-center gap-6">
             <Link href="/terms" className="text-xs text-white/25 hover:text-white/50 transition-colors">Terms</Link>
             <Link href="/privacy" className="text-xs text-white/25 hover:text-white/50 transition-colors">Privacy</Link>

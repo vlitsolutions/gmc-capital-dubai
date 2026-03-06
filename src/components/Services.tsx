@@ -21,7 +21,7 @@ const services = [
   },
   {
     icon: BarChart3,
-    title: "Performance Marketing",
+    title: "Digital Marketing Strategy & Performance",
     description:
       "Data-driven digital campaigns across search, social, and programmatic channels. Every dirham and euro invested is tracked, optimised, and accountable.",
     tag: "Marketing",

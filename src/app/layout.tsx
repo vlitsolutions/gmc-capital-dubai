@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     locale: "en_AE",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "GMC Capital | Dubai Marketing Management & Consultancy",
     description:
       "Strategic marketing management and consultancy bridging Dubai and Europe.",
@@ -137,7 +137,7 @@ function StructuredData() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Performance Marketing",
+            name: "Digital Marketing Strategy & Performance",
             description:
               "Data-driven digital campaigns across search, social, and programmatic channels.",
           },
