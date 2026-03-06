@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import RecaptchaProvider from "@/components/RecaptchaProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -37,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${geistSans.variable} font-sans antialiased`}>
-        {children}
+        <RecaptchaProvider>{children}</RecaptchaProvider>
       </body>
     </html>
   );

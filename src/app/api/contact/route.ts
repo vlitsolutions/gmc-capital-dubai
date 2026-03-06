@@ -23,9 +23,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Verify reCAPTCHA
-    const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY;
-    if (recaptchaSecret) {
+    // Verify reCAPTCHA Enterprise
+    const recaptchaApiKey = process.env.RECAPTCHA_API_KEY;
+    const recaptchaProjectId = process.env.RECAPTCHA_PROJECT_ID;
+    const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+    if (recaptchaApiKey && recaptchaProjectId) {
       if (!captchaToken) {
         return NextResponse.json(
           { error: "reCAPTCHA verification is required." },
@@ -34,19 +36,25 @@ export async function POST(req: NextRequest) {
       }
 
       const verifyRes = await fetch(
-        "https://www.google.com/recaptcha/api/siteverify",
+        `https://recaptchaenterprise.googleapis.com/v1/projects/${recaptchaProjectId}/assessments?key=${recaptchaApiKey}`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({
-            secret: recaptchaSecret,
-            response: captchaToken,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            event: {
+              token: captchaToken,
+              expectedAction: "contact_form",
+              siteKey: recaptchaSiteKey,
+            },
           }),
         }
       );
 
       const verifyData = await verifyRes.json();
-      if (!verifyData.success) {
+      if (
+        !verifyData.tokenProperties?.valid ||
+        verifyData.riskAnalysis?.score < 0.5
+      ) {
         return NextResponse.json(
           { error: "reCAPTCHA verification failed. Please try again." },
           { status: 400 }

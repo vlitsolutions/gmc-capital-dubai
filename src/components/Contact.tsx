@@ -1,8 +1,8 @@
 "use client";
 
 import { MapPin, Mail, Phone, ArrowRight, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
-import { useState, useRef } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
+import { useState, useRef, useCallback } from "react";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { siteConfig } from "@/lib/config";
 
 type FormState = "idle" | "submitting" | "success" | "error";
@@ -10,10 +10,10 @@ type FormState = "idle" | "submitting" | "success" | "error";
 export default function Contact() {
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormState("submitting");
     setErrorMessage("");
@@ -21,10 +21,18 @@ export default function Contact() {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    const captchaToken = recaptchaRef.current?.getValue();
-    if (!captchaToken) {
+    if (!executeRecaptcha) {
       setFormState("error");
-      setErrorMessage("Please complete the reCAPTCHA verification.");
+      setErrorMessage("reCAPTCHA not ready. Please try again.");
+      return;
+    }
+
+    let captchaToken: string;
+    try {
+      captchaToken = await executeRecaptcha("contact_form");
+    } catch {
+      setFormState("error");
+      setErrorMessage("reCAPTCHA verification failed. Please try again.");
       return;
     }
 
@@ -51,16 +59,13 @@ export default function Contact() {
 
       setFormState("success");
       formRef.current?.reset();
-      recaptchaRef.current?.reset();
     } catch (err) {
       setFormState("error");
       setErrorMessage(
         err instanceof Error ? err.message : "Something went wrong. Please try again."
       );
     }
-  }
-
-  const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  }, [executeRecaptcha]);
 
   return (
     <section id="contact" className="relative py-28 lg:py-36 bg-warm-50">
@@ -207,16 +212,6 @@ export default function Contact() {
                     placeholder="Tell us about your project or enquiry..."
                   />
                 </div>
-
-                {recaptchaSiteKey && (
-                  <div className="flex justify-center">
-                    <ReCAPTCHA
-                      ref={recaptchaRef}
-                      sitekey={recaptchaSiteKey}
-                      theme="light"
-                    />
-                  </div>
-                )}
 
                 {formState === "error" && errorMessage && (
                   <div className="flex items-center gap-2 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600">

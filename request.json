@@ -1,0 +1,7 @@
+{
+  "event": {
+    "token": "test-token",
+    "expectedAction": "contact_form",
+    "siteKey": "6Lf--YEsAAAAAK_1Xg0ejjBWeKQTFrsBVEZzslfA"
+  }
+}
