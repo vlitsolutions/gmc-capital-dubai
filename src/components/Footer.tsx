@@ -7,6 +7,8 @@ const footerLinks = {
     { label: "Performance Marketing", href: "#services" },
     { label: "Market Entry", href: "#services" },
     { label: "Business Advisory", href: "#services" },
+    { label: "Marketing Management", href: "#services" },
+    { label: "Management Consultancy", href: "#services" },
   ],
   Company: [
     { label: "About Us", href: "#about" },

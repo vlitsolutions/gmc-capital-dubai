@@ -36,10 +36,10 @@ export default function About() {
             </h2>
             <div className="mt-8 space-y-5 text-base text-navy-700/80 leading-relaxed">
               <p>
-                GMC Capital is a Dubai-based marketing management and
-                consultancy firm registered in Meydan Free Zone. We specialise
-                in helping businesses navigate the complexities of scaling
-                across the Middle East and Europe.
+                GMC Capital L.L.C-FZ is a management consultancy and marketing
+                management firm licensed in Meydan Free Zone, Dubai. We
+                specialise in helping businesses navigate the complexities of
+                scaling across the Middle East and Europe.
               </p>
               <p>
                 Founded on the principle that exceptional strategy requires both

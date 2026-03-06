@@ -7,6 +7,8 @@ import {
   Users,
   PenTool,
   Globe2,
+  Settings,
+  Briefcase,
 } from "lucide-react";
 
 const services = [
@@ -64,6 +66,20 @@ const services = [
     title: "Cross-Market Consulting",
     description:
       "Navigate regulatory, cultural, and commercial complexities of operating across the UAE and Europe with our dual-market expertise.",
+    tag: "Consultancy",
+  },
+  {
+    icon: Settings,
+    title: "Marketing Management",
+    description:
+      "End-to-end marketing management, from planning and budgeting to execution and reporting. We run your marketing function so you can focus on growth.",
+    tag: "Marketing",
+  },
+  {
+    icon: Briefcase,
+    title: "Management Consultancy",
+    description:
+      "Strategic management consultancy covering business planning, process optimisation, and performance improvement to drive sustainable results.",
     tag: "Consultancy",
   },
 ];

@@ -10,7 +10,7 @@ export const siteConfig = {
     city: "Dubai",
     country: "United Arab Emirates",
   },
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@gmccapital.ae",
-  phone: process.env.NEXT_PUBLIC_CONTACT_PHONE || "+971 00 000 0000",
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@gmc-capital.com",
+  phone: process.env.NEXT_PUBLIC_CONTACT_PHONE || "+971 50 399 6528",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://gmccapital.ae",
 } as const;
